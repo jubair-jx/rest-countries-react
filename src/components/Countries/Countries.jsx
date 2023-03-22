@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "../Countries/Countries.css";
 const Countries = () => {
   const [country, setCountries] = useState([]);
   useEffect(() => {
@@ -12,20 +12,23 @@ const Countries = () => {
   return (
     <div>
       <h1>Total Show Country : {country.length}</h1>
-
-      {country.map((desh) => (
-        <ShowCountry
-          img={desh.flags.png}
-          name={desh.name.common}
-          capital={desh.capital}
-          indep={desh.independent}
-        ></ShowCountry>
-      ))}
+      <div className="containers">
+        {country.map((desh) => (
+          <ShowCountry
+            img={desh.flags.png}
+            name={desh.name.common}
+            capital={desh.capital}
+            indep={desh.independent}
+            key={desh.cca2}
+          ></ShowCountry>
+        ))}
+      </div>
     </div>
   );
 };
 
 function ShowCountry(props) {
+  const { name, capital, indep } = props;
   return (
     <div
       style={{
@@ -38,9 +41,9 @@ function ShowCountry(props) {
         style={{ marginTop: "20px", borderRadius: "20px" }}
         src={props.img ? props.img : "Not Found Flag"}
       ></img>
-      <h2>Name : {props.name} </h2>
-      <p>Capital : {props.capital} </p>
-      <p>Independent : {props.indep ? "Yes" : "NO"}</p>
+      <h2>Name : {name} </h2>
+      <p>Capital : {capital} </p>
+      <p>Independent : {indep ? "Yes" : "NO"}</p>
     </div>
   );
 }
